@@ -10,9 +10,9 @@ var usersRouter = require('./routes/items');
 var compileSass = require('express-compile-sass');
 
 var app = express();
-app.set('view engine', 'ejs');
-app.set('views',path.join(__dirname, 'views'));
-app.engine('html', require('ejs').renderFile);
+// app.set('view engine', 'ejs');
+// app.set('views',path.join(__dirname, 'views'));
+// app.engine('html', require('ejs').renderFile);
 
 app.use(compileSass({
   root: process.cwd(),
@@ -24,8 +24,8 @@ app.use(compileSass({
 app.use(express.static( process.cwd()));
 
 // // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());

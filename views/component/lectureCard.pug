@@ -1,0 +1,9 @@
+li.card-lecture
+    a.lecture-title(href="#") #{val.lecture}
+    h6.lecture-time
+        i.material-icons.ic-lecture-info access_time
+        span #{val.start_time} - #{val.end_time} | (#{val.dayofweek})
+    ul.list-lecture-info
+        li 교과목 코드 : A0000001
+        li 담당 교수 : #{val.professor}
+        li 강의실 : #{val.location}

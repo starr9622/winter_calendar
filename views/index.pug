@@ -1,5 +1,60 @@
 extends layout
-
+    
 block content
-  h1= title
-  p Happy Coding!
+  .container-lecture
+    section.header
+      h3.headline 시간표 만들기
+    section.section-nav
+      form#search-form.form-search
+        input(type="text").form-control(placeholder='강의 검색')
+        span
+          i.material-icons.ic-search search
+      ul.list-lecture
+        -var lec = [{lecture: '논리회로', professor: '이명숙', location: 'A동403', start_time:10, end_time:12, dayofweek:['월','금']},{lecture: '논리회로2', professor: '이명숙', location: 'A동403', start_time:10, end_time:12, dayofweek:['월','금']},{lecture: '논리회로3', professor: '이명숙', location: 'A동403', start_time:10, end_time:12, dayofweek:['월','금']}] 
+        each val in lec
+          include component/lectureCard.pug
+    section.section-list
+      .container-xl
+        header.header-timetable-info
+          h3 2019년 11월
+          .btn-group(role="group")
+            button(type="button").btn.btn-light.btn-previous
+              i.material-icons.ic-previous chevron_left
+            button(type="button").btn.btn-light.btn-today 오늘  
+            button(type="button").btn.btn-light.btn-next
+              i.material-icons.ic-next chevron_right
+        .table-schedule
+          .timeline
+            mixin time(t) 
+              li
+                span= t 
+            ul
+              +time('09:00')
+              +time('09:30')
+              +time('10:00')
+              +time('10:30')
+              +time('11:00')
+              +time('11:30')
+              +time('12:00')
+              +time('12:30')
+              +time('13:00')
+              +time('13:30')
+              +time('14:00')
+              +time('14:30')
+              +time('15:00')
+              +time('15:30')
+              +time('16:00')
+              +time('16:30')
+              +time('17:00')
+              +time('17:30')
+              +time('18:00')
+              +time('18:30')
+          .table-schedule-subject
+            ul.list-lecture-item
+              li.timeline-vertical
+                .top-info.today
+                  h4.day Mon
+                ul
+                  -var lec = [{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]                    
+                  each val in lec
+                    include component/lectureInfo.pug
