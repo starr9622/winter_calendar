@@ -1,0 +1,8 @@
+h3.lecture-title= selectItem.title
+ul.lecture-info
+    each content in selectItem.contents
+        li.lecture-time
+            i.material-icons.ic-lecture-info= content.kind
+            span= content.val
+.lecture-description
+    p.txt-description= selectItem.info

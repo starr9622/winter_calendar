@@ -1,0 +1,7 @@
+li.timeline-vertical
+    -var today = "Fri"
+    .top-info(class= days.day == today ? "today" : '')
+        h4.day= days.day
+    ul
+        each val in days.lec
+            include lectureInfo.pug
