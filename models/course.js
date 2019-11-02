@@ -12,5 +12,6 @@ module.exports = (sequelize, DataTypes) => {
   course.associate = function(models) {
     // associations can be defined here
   };
+  course.removeAttribute('id');
   return course;
 };

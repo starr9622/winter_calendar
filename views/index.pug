@@ -10,19 +10,12 @@ block content
         span
           i.material-icons.ic-search search
       ul.list-lecture
-        -var lec = [{lecture: '논리회로', professor: '이명숙', location: 'A동403', start_time:10, end_time:12, dayofweek:['월','금']},{lecture: '논리회로2', professor: '이명숙', location: 'A동403', start_time:10, end_time:12, dayofweek:['월','금']},{lecture: '논리회로3', professor: '이명숙', location: 'A동403', start_time:10, end_time:12, dayofweek:['월','금']}] 
-        each val in lec
+        each val in course
           include component/lectureCard.pug
     section.section-list
       .container-xl
         header.header-timetable-info
           h3 2019년 11월
-          .btn-group(role="group")
-            button(type="button").btn.btn-light.btn-previous
-              i.material-icons.ic-previous chevron_left
-            button(type="button").btn.btn-light.btn-today 오늘  
-            button(type="button").btn.btn-light.btn-next
-              i.material-icons.ic-next chevron_right
         .table-schedule
           .timeline
             mixin time(t) 
@@ -34,8 +27,8 @@ block content
                 +time(t)
           .table-schedule-subject
             ul.list-lecture-item
-              -var week = [{ 'day':"Mon" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Tue" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Wed" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Thu" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Fri" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-9'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]}]
-              each days in week
+              //- -var week = [{ 'day':"Mon" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Tue" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Wed" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Thu" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Fri" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-9'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]}]
+              each days in schedule
                 include component/week.pug
   .modal.fade(id="modal-lecture-info" role="dialog" aria-hidden="true")
     .modal-dialog(role="document")
