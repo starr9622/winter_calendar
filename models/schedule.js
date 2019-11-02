@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   schedule.associate = function(models) {
     // associations can be defined here
+    schedule.belongsTo(models.course, {foreignKey: 'code', targetKey: 'code'});
   };
   return schedule;
 };

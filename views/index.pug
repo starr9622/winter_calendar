@@ -27,7 +27,6 @@ block content
                 +time(t)
           .table-schedule-subject
             ul.list-lecture-item
-              //- -var week = [{ 'day':"Mon" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Tue" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Wed" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Thu" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-11'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]},{ 'day':"Fri" , 'lec':[{lecture: '논리회로', location: 'A동403', data:'lecture-01', class:'hr-9'},{lecture: '논리회로', location: 'A동403', data:'lecture-02', class:'hr-13'},{lecture: '논리회로', location: 'A동403', data:'lecture-03', class:'hr-16'}]}]
               each days in schedule
                 include component/week.pug
   .modal.fade(id="modal-lecture-info" role="dialog" aria-hidden="true")
@@ -38,7 +37,7 @@ block content
           -var selectItem = {'title': '웹 프로그래밍', 'contents':[{'kind': 'access_alarm', 'val':'강의 시간 : 09:00 - 10:50 | (월), (수)'},{'kind': 'code', 'val':'교과목 코드 : A0000001'},{'kind': 'school', 'val':'담당 교수 : 김진수'},{'kind': 'business', 'val':'강의실 : 공학관 204'}], 'info': '본 강의에서는 JSP를 이용한 웹 기반 프로그래밍 기초 및 응용기술에 대해 학습합니다. 특히 실습 위주의 수업으로 프로그래밍 스킬 향상 및 실무 능력을 갖출 수 있도록 합니다.'}
           include component/modal/modalbody.pug
         .modal-footer
-          button(type="button" data-dismiss="modal").btn.btn-light  취소
+          button(type="button" data-dismiss="modal").btn.btn-light 취소
           button(type="button").btn.btn-primary 과목 등록하기
   .modal.fade(id="modal-lecture-task" role="dialog" aria-hidden="true")
     .modal-dialog(role="document")

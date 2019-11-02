@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   course.associate = function(models) {
     // associations can be defined here
+    // course.hasMany(models.schedule);
   };
   course.removeAttribute('id');
   return course;

@@ -6,7 +6,13 @@ var Op = sequelize.Op;
 
 router.get('/getList', function(req, res, next){
     models.course.findAll().then(course => {
-        res.send(course)
+        models.schedule.findAll({
+            include: [{
+              model: models.course 
+            }]
+          }).then(schedule => {
+        res.send(schedule)
+          });
     });
 })
 router.get('/searchItem', function(req, res, next){
@@ -40,6 +46,25 @@ router.get('/searchItem', function(req, res, next){
         res.send(result);
         console.log(result.count);
         console.log(result.rows);
+    });
+})
+router.get('/seleteItem', function(req, res, next){
+    models.course.findOne({
+        where: {code:req.query.code}
+    })
+    .then(result => {
+        res.send(result);
+    });
+})
+router.post('/addschedule', function (req, res, next) {
+    models.schedule.findOrCreate({
+        where:{code:req.body.code},
+        defaults:{
+            code:req.body.code,
+            memo:''
+        }
+    }).then(([schedule, created]) =>{
+        res.send(created);
     });
 })
 

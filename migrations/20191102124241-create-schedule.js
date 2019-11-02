@@ -14,6 +14,7 @@ module.exports = {
           model: 'courses',
           key: 'code'
         },
+        unique: true
       },
       memo: {
         type: Sequelize.TEXT

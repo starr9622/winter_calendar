@@ -1,7 +1,6 @@
 li.timeline-vertical
     .top-info(class= days.day == today ? "today" : '')
         h4.day= days.day
-        p= today
     ul
         each val in days.lec
             include lectureInfo.pug

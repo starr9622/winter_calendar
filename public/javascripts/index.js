@@ -1,7 +1,40 @@
 $(function () {
+    let selectCode = '';
     $('.list-lecture').on('click', '.card-lecture' ,function () {
-        console.log('과목클릭')
+        let text = $(this).children('.list-lecture-info').children().first().text().split(":");
+        let code = text[1].trim();
+        selectCode = code;
+        $.ajax({
+            url: '/api/seleteItem',
+            dataType: 'json',
+            type: 'GET',
+            data: {code:code},
+            success: function(result) {
+                if(result){
+                    $(".modal-body").empty();
+                    $(".modal-body").append('<h3 class="lecture-title">'+result.lecture
+                    +'</h3><ul class="lecture-info"><li class="lecture-time"><i class="material-icons ic-lecture-info">access_alarm</i><span>강의 시간 : '+
+                    result.start_time+' - '+result.end_time+' | '+result.dayofweek+'</span></li><li class="lecture-time"><i class="material-icons ic-lecture-info">code</i><span>교과목 코드 : '+result.code
+                    +'</span></li><li class="lecture-time"><i class="material-icons ic-lecture-info">school</i><span>담당 교수 : '+result.professor+'</span></li><li class="lecture-time"><i class="material-icons ic-lecture-info">business</i><span>강의실 : '+
+                    result.location+'</span></li></ul><div class="lecture-description"><p class="txt-description">본 강의에서는 JSP를 이용한 웹 기반 프로그래밍 기초 및 응용기술에 대해 학습합니다. 특히 실습 위주의 수업으로 프로그래밍 스킬 향상 및 실무 능력을 갖출 수 있도록 합니다.</p></div>');
+                }
+                    
+            }
+        });
         $('#modal-lecture-info').modal('show');
+    });
+
+    $('#modal-lecture-info .btn-primary').on('click', function () {
+        $.ajax({
+            url: '/api/addschedule',
+            dataType: 'json',
+            type: 'post',
+            data: {code:selectCode},
+            success: function(result) {
+                $('#modal-lecture-info').modal('hide');
+            }
+        });
+        
     });
 
     $('.lecture-time > a').click(function () {
