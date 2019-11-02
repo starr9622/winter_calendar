@@ -3,7 +3,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  // res.render('calender.html');
   res.render('index', { title: 'programmers 과제 테스트 템플릿 - Node.js' });
 });
 

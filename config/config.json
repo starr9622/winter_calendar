@@ -3,15 +3,14 @@
     "username": "root",
     "password": "password",
     "database": "my_database",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "host": "mysql-server",
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "password",
     "database": "my_database",
-    "host": "127.0.0.1",
+    "host": "mysql-server",
     "dialect": "mysql",
     "operatorsAliases": false
   },

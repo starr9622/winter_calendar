@@ -3,25 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var models = require("./models/index.js");   // mysql 시퀄라이저 모델
+models.sequelize.sync().then( () => {
+  console.log(" DB 연결 성공")
+}).catch(err => {
+  console.log("연결 실패")
+  console.log(err)
+})
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/items');
 
-var compileSass = require('express-compile-sass');
-
 var app = express();
-// app.set('view engine', 'ejs');
-// app.set('views',path.join(__dirname, 'views'));
-// app.engine('html', require('ejs').renderFile);
-
-app.use(compileSass({
-  root: process.cwd(),
-  sourceMap: true, // Includes Base64 encoded source maps in output css
-  sourceComments: true, // Includes source comments in output css
-  watchFiles: true, // Watches sass files and updates mtime on main files for each change
-  logToConsole: false // If true, will log to console.error on errors
-}));
-app.use(express.static( process.cwd()));
 
 // // view engine setup
 app.set('views', path.join(__dirname, 'views'));
