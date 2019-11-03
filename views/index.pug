@@ -34,8 +34,6 @@ block content
       .modal-content
         include component/modal/common.pug
         .modal-body
-          -var selectItem = {'title': '웹 프로그래밍', 'contents':[{'kind': 'access_alarm', 'val':'강의 시간 : 09:00 - 10:50 | (월), (수)'},{'kind': 'code', 'val':'교과목 코드 : A0000001'},{'kind': 'school', 'val':'담당 교수 : 김진수'},{'kind': 'business', 'val':'강의실 : 공학관 204'}], 'info': '본 강의에서는 JSP를 이용한 웹 기반 프로그래밍 기초 및 응용기술에 대해 학습합니다. 특히 실습 위주의 수업으로 프로그래밍 스킬 향상 및 실무 능력을 갖출 수 있도록 합니다.'}
-          include component/modal/modalbody.pug
         .modal-footer
           button(type="button" data-dismiss="modal").btn.btn-light 취소
           button(type="button").btn.btn-primary 과목 등록하기
@@ -44,18 +42,6 @@ block content
       .modal-content
         include component/modal/common.pug
         .modal-body
-          -var selectItem = {'title': '웹 프로그래밍', 'contents':[{'kind': 'access_alarm', 'val':'강의 시간 : 09:00 - 10:50 | (월), (수)'},{'kind': 'code', 'val':'교과목 코드 : A0000001'},{'kind': 'school', 'val':'담당 교수 : 김진수'},{'kind': 'business', 'val':'강의실 : 공학관 204'}], 'info': '본 강의에서는 JSP를 이용한 웹 기반 프로그래밍 기초 및 응용기술에 대해 학습합니다. 특히 실습 위주의 수업으로 프로그래밍 스킬 향상 및 실무 능력을 갖출 수 있도록 합니다.'}
-          include component/modal/modalbody.pug
-          .lecture-memo
-            .memo-header 메모
-            ul
-              li.memo-list
-                .memo-content(data-toggle="tooltip" data-placement="top" title="" data-original-title="과제 설명 텍스트 과제 설명 텍스트 과제 설명 텍스트")
-                  i.material-icons.ic-lecture-noti assignment
-                  span.lecture-noti-title 과제 제목 텍스트
-                .memo-btn
-                  a(href="")
-                    i.material-icons.ic-lecture-noti delete
         .modal-footer
           .left
             button(type="button" data-toggle="popover" data-trigger="click" data-placement="right" data-html="true").btn.btn-light-primary 메모 등록
@@ -70,4 +56,4 @@ block content
       .form-group
         label(for="message-text").col-form-label 설명
         textarea.form-control(id="message-text" placeholder="설명 추가")
-      button(type="button").btn.btn-primary.btn-save 등록
+      button(type="button").btn.btn-primary.btn-save(onclick="memobtnAction()") 등록

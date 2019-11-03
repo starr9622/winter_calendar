@@ -6,7 +6,6 @@ var models = require('../models');
 router.get('/', function(req, res, next) {
   var d = new Date();
   var week = new Array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
-  var time = new Array('hr-9','hr-10','hr-11','hr-13','hr-15','hr-17','hr-19');
   var position = new Array('lecture-01','lecture-02','lecture-03','lecture-04','lecture-05','lecture-06','lecture-07','lecture-08','lecture-09','lecture-10');
   models.course.findAll().then(course => {
       models.schedule.findAll({
@@ -22,6 +21,7 @@ router.get('/', function(req, res, next) {
             let location = timeSchedule.course.location;
             let start_time = timeSchedule.course.start_time;
             let end_time = timeSchedule.course.end_time;
+            let memo = timeSchedule.memo ? JSON.parse(timeSchedule.memo) : 0;
             if(count > 10){
               count = 0;
             }
@@ -30,7 +30,8 @@ router.get('/', function(req, res, next) {
                 lecture: lecture,
                 location: location,
                 data: position[count], 
-                class: end_time - start_time == 1 ? 'hr-'+start_time : 'hr-'+start_time+" two-hr" 
+                class: end_time - start_time == 1 ? 'hr-'+start_time : 'hr-'+start_time+" two-hr",
+                memo : memo
               });
             });
             count++;
