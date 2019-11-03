@@ -48,16 +48,64 @@ router.get('/seleteItem', function(req, res, next){
     });
 })
 router.post('/addschedule', function (req, res, next) {
-    models.schedule.findOrCreate({
-        where:{code:req.body.code},
-        defaults:{
-            code:req.body.code,
-            memo:''
+    models.schedule.findAll({
+        include :[{
+            model: models.course
+        }]
+    }).then((schedule) =>{
+        if(schedule.length <= 0){
+            createschedule();
         }
-    }).then(([schedule, created]) =>{
-        res.send(created);
+        models.course.findOne({
+            where:{
+                code : req.body.code
+            }
+        }).then((course)=>{
+            let table = {'월':[],'화':[],'수':[],'목':[],'금':[]};
+            let c_week = course.dayofweek.split("");
+            let insert = true;
+            schedule.forEach(sche=>{
+                if(sche.course.code == req.body.code){
+                    insert = false;
+                } 
+                let week = sche.course.dayofweek.split("");
+                week.forEach(day => {
+                    table[day].push({
+                        lecture: sche.course.lecture,
+                        start_time: sche.course.start_time,
+                        end_time: sche.course.end_time
+                    });
+                });
+                c_week.forEach(c=>{
+                    table[c].forEach(t=>{
+                        if(course.start_time == t.start_time
+                        || (course.start_time < t.start_time && course.start_time >  t.end_time )){
+                            insert = false;
+                        }
+                    })
+                })
+            })
+            if(insert){
+                createschedule();
+            }else{
+                res.send(false);
+            }
+        });
+    }).catch(function(err) {
+        console.log("find:::",err);
     });
+    function createschedule() {
+        models.schedule.create({
+            code : req.body.code,
+            memo : ''
+        }).then(result => {
+            res.send(result);
+        }).catch(function(err) {
+            console.log("insert:::",err);
+        });
+    }
 })
+
 router.post('/deleteschedule', function (req, res, next) {
     models.schedule.destroy({where:{code:req.body.code}}).then(schedule => {
         res.send(schedule > 0)
@@ -106,7 +154,7 @@ router.post('/deleteMemo', function (req, res, next) {
     }).then(schedule => {
         var memo = JSON.parse(schedule.memo);
         memo.splice(req.body.deletememo, 1);
-        schedule.update({memo: JSON.stringify(memo)}).then(result=>{
+        schedule.update({memo: JSON.stringify(newMemo)}).then(result=>{
             res.send(result);
         })
     });

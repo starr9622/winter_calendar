@@ -31,8 +31,12 @@ $(function () {
             type: 'post',
             data: {code:selectCode},
             success: function(result) {
-                $('#modal-lecture-info').modal('hide');
-                document.location.href = '/';
+                if(result){
+                    $('#modal-lecture-info').modal('hide');
+                    document.location.href = '/';
+                }else{
+                    alert('선택하신 시간에 이미 등록된 강의가 있습니다.');
+                }
             }
         });
         
@@ -128,7 +132,7 @@ $(function () {
                     $(".list-lecture").append("<li class='card-lecture'><a href='#' class='lecture-title'>"+element.lecture+"</a><h6 class='lecture-time'><i class='material-icons ic-lecture-info'>access_time</i><span>"+element.start_time+" - "+element.end_time+" | "+element.dayofweek+" </span></h6><ul class='list-lecture-info'><li> 교과목 코드 : "+element.code+"</li><li> 담당 교수 : "+element.professor+"</li><li> 강의실 : "+element.location+"</li></ul></li>");
                 });
                 }else{
-                    list.appendChild("<li class='card-lecture'>검색하는 강의가 존재하지 않습니다.</li>");
+                    $(".list-lecture").append("<li class='card-lecture'>검색하는 강의가 존재하지 않습니다.</li>");
                 }
         }
         });

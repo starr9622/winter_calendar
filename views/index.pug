@@ -5,7 +5,7 @@ block content
     section.header
       h3.headline 시간표 만들기
     section.section-nav
-      form#search-form.form-search
+      form#search-form.form-search(onsubmit="return false;")
         input(type="text").form-control(placeholder='강의 검색')
         span
           i.material-icons.ic-search search

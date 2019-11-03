@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
             let start_time = timeSchedule.course.start_time;
             let end_time = timeSchedule.course.end_time;
             let memo = timeSchedule.memo ? JSON.parse(timeSchedule.memo) : 0;
-            if(count > 10){
+            if(count > 9){
               count = 0;
             }
             week.forEach(day => {
