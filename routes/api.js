@@ -78,14 +78,12 @@ router.post('/addschedule', function (req, res, next) {
                         });
                         c_week.forEach(c=>{
                             table[c].forEach(t=>{
-                                let timetable = t.end_time - t.start_time == 1 ? [t.start_time,t.end_time] : [t.start_time,t.start_time+1,t.end_time];
-                                if(course.start_time == t.start_time
-                                || timetable.includes(course.start_time)
-                                || timetable.includes(course.end_time)){
+                                let timetable = t.end_time - t.start_time == 1 ? [t.start_time] : [t.start_time,t.start_time+1];
+                                if(timetable.includes(course.start_time)){
                                     insert = false;
                                 }
-                            })
-                        })
+                            });
+                        });
                     }
                 })
                 if(insert){
