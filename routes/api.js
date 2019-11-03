@@ -154,7 +154,7 @@ router.post('/deleteMemo', function (req, res, next) {
     }).then(schedule => {
         var memo = JSON.parse(schedule.memo);
         memo.splice(req.body.deletememo, 1);
-        schedule.update({memo: JSON.stringify(newMemo)}).then(result=>{
+        schedule.update({memo: JSON.stringify(memo)}).then(result=>{
             res.send(result);
         })
     });
