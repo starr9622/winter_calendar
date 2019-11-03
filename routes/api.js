@@ -55,42 +55,46 @@ router.post('/addschedule', function (req, res, next) {
     }).then((schedule) =>{
         if(schedule.length <= 0){
             createschedule();
-        }
-        models.course.findOne({
-            where:{
-                code : req.body.code
-            }
-        }).then((course)=>{
-            let table = {'월':[],'화':[],'수':[],'목':[],'금':[]};
-            let c_week = course.dayofweek.split("");
-            let insert = true;
-            schedule.forEach(sche=>{
-                if(sche.course.code == req.body.code){
-                    insert = false;
-                } 
-                let week = sche.course.dayofweek.split("");
-                week.forEach(day => {
-                    table[day].push({
-                        lecture: sche.course.lecture,
-                        start_time: sche.course.start_time,
-                        end_time: sche.course.end_time
-                    });
-                });
-                c_week.forEach(c=>{
-                    table[c].forEach(t=>{
-                        if(course.start_time == t.start_time
-                        || (course.start_time < t.start_time && course.start_time >  t.end_time )){
-                            insert = false;
-                        }
-                    })
+        }else{
+            models.course.findOne({
+                where:{
+                    code : req.body.code
+                }
+            }).then((course)=>{
+                let table = {'월':[],'화':[],'수':[],'목':[],'금':[]};
+                let c_week = course.dayofweek.split("");
+                let insert = true;
+                schedule.forEach(sche=>{
+                    if(sche.course.code == req.body.code){
+                        insert = false;
+                    }else{
+                        let week = sche.course.dayofweek.split("");
+                        week.forEach(day => {
+                            table[day].push({
+                                lecture: sche.course.lecture,
+                                start_time: sche.course.start_time,
+                                end_time: sche.course.end_time
+                            });
+                        });
+                        c_week.forEach(c=>{
+                            table[c].forEach(t=>{
+                                let timetable = t.end_time - t.start_time == 1 ? [t.start_time,t.end_time] : [t.start_time,t.start_time+1,t.end_time];
+                                if(course.start_time == t.start_time
+                                || timetable.includes(course.start_time)
+                                || timetable.includes(course.end_time)){
+                                    insert = false;
+                                }
+                            })
+                        })
+                    }
                 })
-            })
-            if(insert){
-                createschedule();
-            }else{
-                res.send(false);
-            }
-        });
+                if(insert){
+                    createschedule();
+                }else{
+                    res.send(false);
+                }
+            });
+        }       
     }).catch(function(err) {
         console.log("find:::",err);
     });
